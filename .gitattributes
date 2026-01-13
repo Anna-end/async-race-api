@@ -1,0 +1,35 @@
+# Установите поведение для всех текстовых файлов
+* text=auto
+
+# Явно укажите какие файлы являются текстовыми
+*.html text
+*.css text
+*.js text
+*.ts text
+*.jsx text
+*.tsx text
+*.json text
+*.md text
+*.txt text
+*.yml text
+*.yaml text
+*.xml text
+
+# Укажите файлы которые являются бинарными (не конвертировать)
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.exe binary
+
+# Для файлов конфигурации, которые должны быть в LF даже на Windows
+package.json text eol=lf
+package-lock.json text eol=lf
+tsconfig.json text eol=lf
+.gitignore text eol=lf
+*.config.ts text eol=lf
+.eslintrc.* text eol=lf
+.prettierrc text eol=lf
