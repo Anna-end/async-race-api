@@ -1,3 +1,4 @@
+import { URLSearchParams } from 'node:url';
 import { Car, EngineResponse, DriveResponse, PaginationParams, PaginatedResponse } from './types';
 
 const API_BASE_URL = 'http://localhost:3000';
@@ -30,4 +31,29 @@ async function sendRequest<T>(andpoint: string, options: RequestInit = {}): Prom
   }
 
   return response.json() as Promise<T>;
+}
+
+export async function getCars(params?: PaginationParams): Promise<PaginatedResponse<Car>> {
+  const queryParams = new URLSearchParams(); //то что добавляется после ?
+
+  if (params?._page) queryParams.append('_page', params._page.toString());
+  if (params?._limit) queryParams.append('_limit', params._limit.toString());
+
+  const queryString = queryParams.toString();
+  const endpoint = queryString ? `/garage?${queryString}` : '/garage';
+
+  const response = await fetch(`${API_BASE_URL}${endpoint}`);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch cars: ${response.status}`);
+  }
+
+  const data = await response.json();
+
+  const totalCount = parseInt(response.headers.get('X-Total-Count') || '0', 10);
+
+  return {
+    data: data as Car[],
+    totalCount,
+  };
 }
