@@ -1,24 +1,28 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+const API_BASE_URL = 'http://127.0.0.1:3000';
+const GARAGE_URL = `${API_BASE_URL}/garage`;
+async function createCar(name: string, color: string) {
+  try {
+    const response = await fetch(GARAGE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: name,
+        color: color,
+      }),
+    });
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+    if (!response.ok) {
+      throw new Error(`Ошибка: ${response.status}`);
+    }
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+    const newCar = await response.json();
+    console.log('Создана новая машина:', newCar);
+    return newCar;
+  } catch (error) {
+    console.error('Ошибка при создании машины:', error);
+    return null;
+  }
+}
+createCar('BMW', 'red');
