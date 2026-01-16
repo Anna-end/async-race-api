@@ -57,3 +57,23 @@ export async function getCars(params?: PaginationParams): Promise<PaginatedRespo
     totalCount,
   };
 }
+export async function getCar(id: number): Promise<Car> {
+  return sendRequest<Car>(`/garage/${id}`);
+}
+export async function createCar(carData: Omit<Car, 'id'>): Promise<Car> {
+  return sendRequest<Car>('/garage', {
+    method: 'POST',
+    body: JSON.stringify(carData),
+  });
+}
+export async function updateCar(id: number, carData: Omit<Car, 'id'>): Promise<Car> {
+  return sendRequest<Car>(`/garage/${id}`, {
+    method: 'PUT',
+    body: JSON.stringify(carData),
+  });
+}
+export async function deleteCar(id: number): Promise<void> {
+  await sendRequest(`/garage/${id}`, {
+    method: 'DELETE',
+  });
+}
