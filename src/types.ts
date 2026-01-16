@@ -29,13 +29,11 @@ export interface PaginationParams {
   _limit?: number;
 }
 
-// 📊 Ответ с пагинацией
 export interface PaginatedResponse<T> {
   data: T[];
   totalCount: number;
 }
 
-// 🎛️ Статусы двигателя (можно использовать как константы)
 export const EngineStatus = {
   STARTED: 'started',
   STOPPED: 'stopped',
