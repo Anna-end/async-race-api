@@ -1,0 +1,57 @@
+h1,
+h2,
+h3 {
+    margin: 0;
+}
+h1,
+h2{
+    font-size: 20px;
+}
+h3{
+    font-size: 15px;
+}
+button {
+    font-size: 10px;
+}
+.async-race-app{ 
+    display: flex;
+    flex-direction: column;
+}
+.controls,
+.garage{
+    margin-top: 30px;
+}
+.race_controls{
+    margin-top: 15px;
+}
+.btn-select,
+.btn-delete {
+    padding: 1px 2px;
+    width: 30px;
+}
+.car-on-track{
+    display: flex;
+    justify-content: space-between; 
+    background-color: #80808061;
+}
+.track-end{
+    padding-right: 50px;
+}
+.car-id{
+    font-size: 10px;
+}
+.winners.hidden {
+    display: none;
+}
+.next-page.hidden {
+    display: none;
+}
+tr{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    justify-items: center;
+}
+.controls.none{
+    display: none;
+}
