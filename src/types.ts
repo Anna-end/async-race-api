@@ -15,7 +15,7 @@ export interface Winner {
   wins: number;
   time: number;
 }
-export interface CarWithStates extends Car {
+export interface CarWithStats extends Car {
   velocity?: number;
   distance?: number;
   success?: boolean;
@@ -33,9 +33,13 @@ export interface PaginatedResponse<T> {
   data: T[];
   totalCount: number;
 }
-
-export const EngineStatus = {
-  STARTED: 'started',
-  STOPPED: 'stopped',
-  DRIVE: 'drive',
-} as const;
+export interface WinnersParams {
+  _page?: number;
+  _limit?: number;
+  _sort?: 'id' | 'wins' | 'time';
+  _order?: 'ASC' | 'DESC';
+}
+export interface WinnersResponse<T> {
+  data: T[];
+  totalCount: number;
+}
